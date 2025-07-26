@@ -3,21 +3,18 @@ class Solution
 public:
     void moveZeroes(vector<int> &nums)
     {
-        int insert_pos = 0;
-        // First pass: Move all non-zero elements to the front
-        for (int i = 0; i < nums.size(); ++i)
+        int slow = 0;
+        // The fast pointer is our main loop iterator
+        for (int fast = 0; fast < nums.size(); ++fast)
         {
-            if (nums[i] != 0)
+            // When the fast pointer finds a non-zero element...
+            if (nums[fast] != 0)
             {
-                nums[insert_pos] = nums[i];
-                insert_pos++;
+                // ...swap it with the element at the slow pointer
+                std::swap(nums[slow], nums[fast]);
+                // And advance the slow pointer
+                slow++;
             }
-        }
-
-        // Second pass: Fill the rest with zeros
-        for (int j = insert_pos; j < nums.size(); ++j)
-        {
-            nums[j] = 0;
         }
     }
 };
