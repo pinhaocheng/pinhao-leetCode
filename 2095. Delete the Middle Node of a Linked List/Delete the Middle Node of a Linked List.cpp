@@ -15,27 +15,20 @@ public:
     {
         if (head->next == nullptr)
         {
+            delete head;
             return nullptr;
         }
 
-        int n = 0;
-        ListNode *current = head; // A temporary pointer to move through the list
-
-        while (current != nullptr)
-        {
-            n++;
-            current = current->next; // Move to the next node
-        }
-
-        int middle_idx = floor(n / 2);
-
-        int m = 0;
+        // Step 2: Count the nodes (Pass 1)
+        ListNode *fast = head; // A temporary pointer to move through the list
+        ListNode *slow = head; // A temporary pointer to move through the list
         ListNode *prev = head; // A temporary pointer to move through the list
 
-        while (m < middle_idx - 1)
+        while (fast != nullptr && fast->next != nullptr)
         {
-            m++;
-            prev = prev->next;
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next; // Move to the next node
         }
 
         ListNode *middle = prev->next;
